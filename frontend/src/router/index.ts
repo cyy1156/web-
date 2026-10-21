@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { ROLE_KEY, TOKEN_KEY } from '@/api/request'
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/login',

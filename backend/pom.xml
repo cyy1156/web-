@@ -18,8 +18,8 @@
     <description>对标上海理工大学教务选课系统的教学演示项目</description>
 
     <properties>
-        <java.version>21</java.version>
-        <maven.compiler.release>21</maven.compiler.release>
+        <java.version>17</java.version>
+        <maven.compiler.release>17</maven.compiler.release>
         <lombok.version>1.18.48</lombok.version>
         <mybatis-plus.version>3.5.17</mybatis-plus.version>
         <jjwt.version>0.12.6</jjwt.version>

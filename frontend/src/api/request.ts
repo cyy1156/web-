@@ -5,8 +5,11 @@ export const TOKEN_KEY = 'cs_token'
 export const ROLE_KEY = 'cs_role'
 export const NAME_KEY = 'cs_name'
 
+// 与 Vite base 保持一致：根路径部署为 /api，子路径部署为 /course/api
+const BASE = import.meta.env.BASE_URL
+
 const instance = axios.create({
-  baseURL: '/api',
+  baseURL: `${BASE}api`,
   timeout: 15000
 })
 
@@ -36,9 +39,9 @@ instance.interceptors.response.use(
       localStorage.removeItem(TOKEN_KEY)
       localStorage.removeItem(ROLE_KEY)
       localStorage.removeItem(NAME_KEY)
-      if (!window.location.pathname.startsWith('/login')) {
+      if (!window.location.pathname.startsWith(`${BASE}login`)) {
         MessagePlugin.error('登录状态已失效，请重新登录')
-        window.location.href = '/login'
+        window.location.href = `${BASE}login`
       }
     } else {
       MessagePlugin.error(error?.response?.data?.message || '网络异常，请稍后再试')
