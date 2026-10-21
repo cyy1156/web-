@@ -1,0 +1,32 @@
+# 生产环境配置：所有敏感项从环境变量读取，仓库里不落明文
+# 启动方式：java -jar app.jar --spring.profiles.active=prod
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:mysql://127.0.0.1:3306/course_selection?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true}
+    username: ${DB_USERNAME:course_sel}
+    password: ${DB_PASSWORD:}
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      connection-timeout: 5000
+
+mybatis-plus:
+  configuration:
+    # 生产环境不再把每条 SQL 打到标准输出
+    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+
+app:
+  jwt:
+    # 必须由环境变量提供，缺失则启动失败（避免误用仓库里的演示密钥）
+    secret: ${JWT_SECRET}
+    expire-hours: 24
+
+logging:
+  file:
+    name: ${LOG_PATH:logs}/course-selection.log
+  logback:
+    rollingpolicy:
+      max-file-size: 20MB
+      max-history: 7
+  level:
+    com.usst.course: info

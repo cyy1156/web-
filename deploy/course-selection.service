@@ -1,0 +1,27 @@
+# /etc/systemd/system/course-selection.service
+# systemctl daemon-reload && systemctl enable --now course-selection
+
+[Unit]
+Description=Course Selection API (Spring Boot)
+After=network-online.target mysql.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=course
+Group=course
+WorkingDirectory=/opt/course-selection
+EnvironmentFile=/etc/course-selection/env
+ExecStart=/usr/bin/java -Xms256m -Xmx512m -jar /opt/course-selection/app.jar --spring.profiles.active=prod
+SuccessExitStatus=143
+Restart=always
+RestartSec=5
+
+StandardOutput=append:/opt/course-selection/logs/stdout.log
+StandardError=append:/opt/course-selection/logs/stderr.log
+
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

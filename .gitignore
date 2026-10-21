@@ -1,0 +1,36 @@
+# ---------- 构建产物 ----------
+backend/target/
+backend/app.jar
+frontend/dist/
+
+# ---------- 依赖 ----------
+frontend/node_modules/
+
+# ---------- 日志与临时文件 ----------
+*.log
+logs/
+backend/run.log
+backend/run.err.log
+frontend/vite.log
+
+# ---------- 本地工具产物（浏览器录制、页面快照） ----------
+.playwright-cli/
+shots/
+login.yaml
+
+# ---------- 环境与密钥 ----------
+.env
+.env.local
+deploy/env
+!deploy/env.example
+
+# ---------- IDE / 系统 ----------
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# ---------- 开发过程文件 ----------
+.codebuddy/plans/
+.codebuddy/brain/
